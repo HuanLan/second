@@ -16,6 +16,7 @@
 		7450E0491C50DA97000E202F /* _23Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7450E0481C50DA97000E202F /* _23Tests.m */; };
 		7450E0541C50DA97000E202F /* _23UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7450E0531C50DA97000E202F /* _23UITests.m */; };
 		7450E0631C50DC30000E202F /* twoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7450E0621C50DC30000E202F /* twoViewController.m */; };
+		7450E0661C50E3CE000E202F /* ThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7450E0651C50E3CE000E202F /* ThreeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		7450E0551C50DA97000E202F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7450E0611C50DC30000E202F /* twoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twoViewController.h; sourceTree = "<group>"; };
 		7450E0621C50DC30000E202F /* twoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = twoViewController.m; sourceTree = "<group>"; };
+		7450E0641C50E3CE000E202F /* ThreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeViewController.h; sourceTree = "<group>"; };
+		7450E0651C50E3CE000E202F /* ThreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +111,8 @@
 				7450E0321C50DA97000E202F /* AppDelegate.m */,
 				7450E0341C50DA97000E202F /* ViewController.h */,
 				7450E0351C50DA97000E202F /* ViewController.m */,
+				7450E0641C50E3CE000E202F /* ThreeViewController.h */,
+				7450E0651C50E3CE000E202F /* ThreeViewController.m */,
 				7450E0611C50DC30000E202F /* twoViewController.h */,
 				7450E0621C50DC30000E202F /* twoViewController.m */,
 				7450E0371C50DA97000E202F /* Main.storyboard */,
@@ -282,6 +287,7 @@
 				7450E0331C50DA97000E202F /* AppDelegate.m in Sources */,
 				7450E0301C50DA97000E202F /* main.m in Sources */,
 				7450E0631C50DC30000E202F /* twoViewController.m in Sources */,
+				7450E0661C50E3CE000E202F /* ThreeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
