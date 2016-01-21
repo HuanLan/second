@@ -10,7 +10,8 @@
 
 @interface ViewController ()
 @property (nonatomic,copy)NSString *github;
-
+@property (nonatomic,copy)NSString *github1;
+@property (nonatomic,copy)NSString *github2;
 @end
 
 @implementation ViewController
