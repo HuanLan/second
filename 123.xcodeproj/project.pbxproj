@@ -15,6 +15,7 @@
 		7450E03E1C50DA97000E202F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7450E03C1C50DA97000E202F /* LaunchScreen.storyboard */; };
 		7450E0491C50DA97000E202F /* _23Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7450E0481C50DA97000E202F /* _23Tests.m */; };
 		7450E0541C50DA97000E202F /* _23UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7450E0531C50DA97000E202F /* _23UITests.m */; };
+		7450E0631C50DC30000E202F /* twoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7450E0621C50DC30000E202F /* twoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		7450E04F1C50DA97000E202F /* 123UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 123UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7450E0531C50DA97000E202F /* _23UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _23UITests.m; sourceTree = "<group>"; };
 		7450E0551C50DA97000E202F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7450E0611C50DC30000E202F /* twoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = twoViewController.h; sourceTree = "<group>"; };
+		7450E0621C50DC30000E202F /* twoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = twoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,8 @@
 				7450E0321C50DA97000E202F /* AppDelegate.m */,
 				7450E0341C50DA97000E202F /* ViewController.h */,
 				7450E0351C50DA97000E202F /* ViewController.m */,
+				7450E0611C50DC30000E202F /* twoViewController.h */,
+				7450E0621C50DC30000E202F /* twoViewController.m */,
 				7450E0371C50DA97000E202F /* Main.storyboard */,
 				7450E03A1C50DA97000E202F /* Assets.xcassets */,
 				7450E03C1C50DA97000E202F /* LaunchScreen.storyboard */,
@@ -276,6 +281,7 @@
 				7450E0361C50DA97000E202F /* ViewController.m in Sources */,
 				7450E0331C50DA97000E202F /* AppDelegate.m in Sources */,
 				7450E0301C50DA97000E202F /* main.m in Sources */,
+				7450E0631C50DC30000E202F /* twoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
