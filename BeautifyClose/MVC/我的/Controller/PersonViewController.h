@@ -1,9 +1,9 @@
 //
 //  PersonViewController.h
-//  BeautifyClose
+//  #2ios
 //
-//  Created by ios on 15/12/6.
-//  Copyright (c) 2015年 陈若男. All rights reserved.
+//  Created by 陈 on 16/3/3.
+//  Copyright © 2016年 陈. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

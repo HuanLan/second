@@ -39,7 +39,7 @@
     // 处理TabBar
     [self setupTabBar];
     
-    self.selectedIndex = 1;
+//    self.selectedIndex = 1;
     
 }
 

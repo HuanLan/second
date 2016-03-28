@@ -8,15 +8,26 @@
 
 #import "HomeViewController.h"
 #import "HeadScrollView.h"
+
+
 #import "HeadModel.h"
+#import "ListModel.h"
 
-@interface HomeViewController ()<UIScrollViewDelegate>
+#import "WJItemsControlView.h"
+
+#import "GoodsViewController.h"
+
+@interface HomeViewController ()<UIScrollViewDelegate>{
+    
+       WJItemsControlView *_itemControlView;
+}
 @property (strong, nonatomic)HeadScrollView *headScrollView;
-
-@property (strong,nonatomic)UICollectionView *newsCollection;
+@property (strong,nonatomic)NSMutableArray *listArr;
+//@property (strong,nonatomic)UICollectionView *newsCollection;
 
 @property (strong, nonatomic)UIPageControl *HpageCtrl;
 @property (nonatomic,strong)NSTimer *timer;
+
 
 
 @end
@@ -31,12 +42,15 @@
     [super viewDidLoad];
     
     _bgScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    _bgScrollView.contentSize = CGSizeMake(kScreenWidth, kheadViewHeight+kScreenHeight);
+    _bgScrollView.showsVerticalScrollIndicator = NO;
     
     [self.view addSubview:_bgScrollView];
-    
+    //滚动视图
     [self createHeadView];
-    [self createNewView];
-    // Do any additional setup after loading the view.
+    
+    
+    
     [self loadData];
     
 }
@@ -45,9 +59,7 @@
 
 - (void)createHeadView{
     
-//    _headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kheadViewHeight)];
-//    [self.bgScrollView addSubview:_headView];
-//
+
     //滑动视图
     _headScrollView = [[HeadScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kheadViewHeight)];
     _headScrollView.delegate = self ;
@@ -63,14 +75,52 @@
 }
 
 
-- (void)createNewView{
+- (void)createGoodsViewWithTitleArr:(NSMutableArray *)arr{
     
-    BaseFlowLAyout *flow = [[BaseFlowLAyout alloc]initWithItem:CGSizeMake(80, 100) withScrollDirection:UICollectionViewScrollDirectionHorizontal withMinSpace:0 withMinLine:10];
+//    NSArray * titleArr = @[@"今日上新",@"上装",@"裙装",@"裤装"];
     
-    _newsCollection = [[UICollectionView alloc]initWithFrame:CGRectMake(0, _headScrollView.bottom, kScreenWidth, 100) collectionViewLayout:flow];
+    UIScrollView *scroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, _headScrollView.bottom+44, kScreenWidth, kScreenHeight-44-64)];
+    scroll.delegate = self;
+    scroll.pagingEnabled = YES;
+    scroll.contentSize = CGSizeMake(kScreenWidth*arr.count, kScreenHeight*4);
+    scroll.backgroundColor = [UIColor yellowColor];
     
-    [_bgScrollView addSubview:_newsCollection];
+    scroll.showsHorizontalScrollIndicator = NO;
+    scroll.bounces = NO;
+    
+    for (int i=0; i<arr.count; i++) {
+                
+        GoodsViewController *collectionView = [[GoodsViewController alloc]initWithFrame:CGRectMake(kScreenWidth*i, 0, kScreenWidth, kScreenHeight)];
+        collectionView.backgroundColor = [UIColor colorWithRed:arc4random_uniform(10)*0.1 green:arc4random_uniform(10)*0.1  blue:arc4random_uniform(10)*0.1  alpha:1];
+        
+        [scroll addSubview:collectionView];
+    }
+    [self.bgScrollView addSubview:scroll];
+
+    //头部控制的segMent
+    WJItemsConfig *config = [[WJItemsConfig alloc]init];
+    config.itemWidth = kScreenWidth/4.0;
+    
+    _itemControlView = [[WJItemsControlView alloc]initWithFrame:CGRectMake(0, _headScrollView.bottom, kScreenWidth, 44)];
+    _itemControlView.tapAnimation = YES;
+    _itemControlView.config = config;
+    _itemControlView.titleArray = arr;
+    
+    __weak typeof (scroll)weakScrollView = scroll;
+    [_itemControlView setTapItemWithIndex:^(NSInteger index,BOOL animation){
+        
+        
+        [weakScrollView scrollRectToVisible:CGRectMake(index*weakScrollView.frame.size.width, 0.0, weakScrollView.frame.size.width,weakScrollView.frame.size.height) animated:animation];
+        
+    }];
+    [self.bgScrollView addSubview:_itemControlView];
+
+    
+
 }
+
+
+
 //轮播图
 - (void)loadData{
     //加载网络数据
@@ -94,6 +144,18 @@
        
     }];
     
+    AFHTTPSessionManager *manager1 = [AFHTTPSessionManager manager];
+    [manager1 GET:@"http://api2.hichao.com/region/recommend/tag" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSArray *dataArr = responseObject[@"data"][@"items"];
+        self.listArr = [ListModel mj_objectArrayWithKeyValuesArray:dataArr];
+        
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"manager1:获取失败");
+        
+
+    }];
 }
 
 //复写data方法
@@ -107,6 +169,19 @@
 
 }
 
+
+- (void)setListArr:(NSMutableArray *)listArr{
+    
+    _listArr = listArr;
+    NSMutableArray *titles = [[NSMutableArray alloc]init];
+    for (ListModel *model in listArr) {
+        
+        [titles addObject:model.nav_name];
+    }
+    //商品视图
+    [self createGoodsViewWithTitleArr:titles];
+
+}
 - (void)loadDataWithHeadScrollView{
     _HpageCtrl.numberOfPages = _data.count;
     
@@ -124,19 +199,44 @@
 #pragma mark---头部滑动视图代理
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offsetX = scrollView.contentOffset.x;
-    int page = (offsetX +kScreenWidth/2)/kScreenWidth;
-    _HpageCtrl.currentPage = page;
+    
+    if (scrollView == _headScrollView) {
+          int page = (offsetX +kScreenWidth/2)/kScreenWidth;
+          _HpageCtrl.currentPage = page;
+
+      
+    }else{
+        
+        CGFloat offset = offsetX/CGRectGetWidth(scrollView.frame);
+        [_itemControlView moveToIndex:offset];
+
+    }
+   
+
 }
 
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    
-    [self removeTimer];
+    if (scrollView == _headScrollView) {
+        
+          [self removeTimer];
+    }
+  
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    if (scrollView == _headScrollView) {
+        
+        [self addTimer];
+        
+    }else{
+        
+        float offset = scrollView.contentOffset.x;
+        offset = offset/CGRectGetWidth(scrollView.frame);
+        [_itemControlView endMoveToIndex:offset];
+
+    }
     
-    [self addTimer];
     
 }
 
