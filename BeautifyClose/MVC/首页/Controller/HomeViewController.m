@@ -9,10 +9,16 @@
 #import "HomeViewController.h"
 #import "HeadScrollView.h"
 #import "HeadModel.h"
+
 @interface HomeViewController ()<UIScrollViewDelegate>
 @property (strong, nonatomic)HeadScrollView *headScrollView;
+
+@property (strong,nonatomic)UICollectionView *newsCollection;
+
 @property (strong, nonatomic)UIPageControl *HpageCtrl;
 @property (nonatomic,strong)NSTimer *timer;
+
+
 @end
 
 @implementation HomeViewController
@@ -29,6 +35,7 @@
     [self.view addSubview:_bgScrollView];
     
     [self createHeadView];
+    [self createNewView];
     // Do any additional setup after loading the view.
     [self loadData];
     
@@ -38,40 +45,48 @@
 
 - (void)createHeadView{
     
-    _headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kheadViewHeight)];
-    [self.bgScrollView addSubview:_headView];
-
+//    _headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kheadViewHeight)];
+//    [self.bgScrollView addSubview:_headView];
+//
     //滑动视图
     _headScrollView = [[HeadScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kheadViewHeight)];
     _headScrollView.delegate = self ;
     _headScrollView.backgroundColor = [UIColor yellowColor];
+    
     //分页
-    _HpageCtrl = [[UIPageControl alloc]initWithFrame:CGRectMake((_headView.width-150)/2.0, _headScrollView.bottom-20, 150, 20)];
-    [_headView addSubview:_headScrollView];
-    [_headView addSubview:_HpageCtrl];
+    _HpageCtrl = [[UIPageControl alloc]initWithFrame:CGRectMake((kScreenWidth-150)/2.0, _headScrollView.bottom-20, 150, 20)];
+    [_bgScrollView addSubview:_headScrollView];
+    [_bgScrollView addSubview:_HpageCtrl];
 
     
     
 }
 
+
+- (void)createNewView{
+    
+    BaseFlowLAyout *flow = [[BaseFlowLAyout alloc]initWithItem:CGSizeMake(80, 100) withScrollDirection:UICollectionViewScrollDirectionHorizontal withMinSpace:0 withMinLine:10];
+    
+    _newsCollection = [[UICollectionView alloc]initWithFrame:CGRectMake(0, _headScrollView.bottom, kScreenWidth, 100) collectionViewLayout:flow];
+    
+    [_bgScrollView addSubview:_newsCollection];
+}
 //轮播图
 - (void)loadData{
     //加载网络数据
+    NSMutableArray *arr = [NSMutableArray array];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager GET:@"http://api2.hichao.com/mall/banner" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         //解析网络数据
-//        NSLog(@"%@",responseObject);
-        NSMutableArray *arr = [[NSMutableArray alloc]init];
-        NSDictionary *dataDic = responseObject[@"data"];
-        NSArray *itemArr = dataDic[@"items"];
+        NSArray *dataArr = responseObject[@"data"][@"items"];
         
-        for (NSDictionary *dic in itemArr) {
+        for(NSDictionary *dic in dataArr){
             
-            HeadModel *model = [[HeadModel alloc]initWithDictionary:dic[@"component"] error:nil];
+            HeadModel *model = [HeadModel mj_objectWithKeyValues:dic[@"component"]];
             [arr addObject:model];
-            
         }
-        self.data = [NSMutableArray arrayWithArray:arr];
+        
+        self.data = arr;
        
 
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -148,7 +163,7 @@
 //    滚动
     
         CGFloat x = page *kScreenWidth;
-        [self.headScrollView setContentOffset:CGPointMake(x, 0) animated:NO];
+        [self.headScrollView setContentOffset:CGPointMake(x, 0) animated:YES];
 
    
     

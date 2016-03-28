@@ -17,6 +17,16 @@
 #import "MJRefresh.h"
 
 
+
+#import "BaseFlowLAyout.h"
+
+
+
+#pragma mark 账号系统
+#define     PASSWORD        @"PASSWORD"     //密码
+#define     ACCOUNT         @"ACCOUNT"      //账户
+#define     AUTOLOGIN       @"AUTOLOGIN"    //自动登录
+
 #define kScreenWidth  [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight  [UIScreen mainScreen].bounds.size.height
 

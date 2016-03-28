@@ -38,6 +38,14 @@
 		7445AECC1C8ED0C700C1C4E3 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 7445AEAD1C8ED0C700C1C4E3 /* UIScrollView+MJRefresh.m */; };
 		7445AECD1C8ED0C700C1C4E3 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7445AEAF1C8ED0C700C1C4E3 /* UIView+MJExtension.m */; };
 		7445AED01C8ED19700C1C4E3 /* PersonSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7445AECF1C8ED19700C1C4E3 /* PersonSB.storyboard */; };
+		745448D51C8FD7A500A6337D /* UrlImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 745448D41C8FD7A500A6337D /* UrlImageButton.m */; };
+		745448D81C8FE22900A6337D /* BaseFlowLAyout.m in Sources */ = {isa = PBXBuildFile; fileRef = 745448D71C8FE22900A6337D /* BaseFlowLAyout.m */; };
+		745448E11C90043800A6337D /* LoginManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 745448DB1C90043800A6337D /* LoginManage.m */; };
+		745448E21C90043800A6337D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 745448DD1C90043800A6337D /* LoginViewController.m */; };
+		745448E31C90043800A6337D /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 745448DE1C90043800A6337D /* LoginViewController.xib */; };
+		745448E41C90043800A6337D /* ShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 745448E01C90043800A6337D /* ShowView.m */; };
+		745448E81C90052600A6337D /* NewsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 745448E61C90052600A6337D /* NewsViewCell.m */; };
+		745448E91C90052600A6337D /* NewsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 745448E71C90052600A6337D /* NewsViewCell.xib */; };
 		74685B351C562674007096CC /* CombineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74685B331C562674007096CC /* CombineViewController.m */; };
 		74685B361C562674007096CC /* CombineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74685B341C562674007096CC /* CombineViewController.xib */; };
 		81DDE7611C16F10300614E78 /* HeadScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 81DDE7601C16F10300614E78 /* HeadScrollView.m */; };
@@ -1163,6 +1171,20 @@
 		7445AEAE1C8ED0C700C1C4E3 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		7445AEAF1C8ED0C700C1C4E3 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		7445AECF1C8ED19700C1C4E3 /* PersonSB.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PersonSB.storyboard; sourceTree = "<group>"; };
+		745448D31C8FD7A500A6337D /* UrlImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrlImageButton.h; sourceTree = "<group>"; };
+		745448D41C8FD7A500A6337D /* UrlImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UrlImageButton.m; sourceTree = "<group>"; };
+		745448D61C8FE22900A6337D /* BaseFlowLAyout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseFlowLAyout.h; sourceTree = "<group>"; };
+		745448D71C8FE22900A6337D /* BaseFlowLAyout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseFlowLAyout.m; sourceTree = "<group>"; };
+		745448DA1C90043800A6337D /* LoginManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginManage.h; sourceTree = "<group>"; };
+		745448DB1C90043800A6337D /* LoginManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginManage.m; sourceTree = "<group>"; };
+		745448DC1C90043800A6337D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		745448DD1C90043800A6337D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		745448DE1C90043800A6337D /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		745448DF1C90043800A6337D /* ShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowView.h; sourceTree = "<group>"; };
+		745448E01C90043800A6337D /* ShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowView.m; sourceTree = "<group>"; };
+		745448E51C90052600A6337D /* NewsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewCell.h; sourceTree = "<group>"; };
+		745448E61C90052600A6337D /* NewsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewCell.m; sourceTree = "<group>"; };
+		745448E71C90052600A6337D /* NewsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsViewCell.xib; sourceTree = "<group>"; };
 		74685B321C562674007096CC /* CombineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CombineViewController.h; sourceTree = "<group>"; };
 		74685B331C562674007096CC /* CombineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CombineViewController.m; sourceTree = "<group>"; };
 		74685B341C562674007096CC /* CombineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CombineViewController.xib; sourceTree = "<group>"; };
@@ -2402,6 +2424,20 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
+		745448D91C90040C00A6337D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				745448DA1C90043800A6337D /* LoginManage.h */,
+				745448DB1C90043800A6337D /* LoginManage.m */,
+				745448DC1C90043800A6337D /* LoginViewController.h */,
+				745448DD1C90043800A6337D /* LoginViewController.m */,
+				745448DE1C90043800A6337D /* LoginViewController.xib */,
+				745448DF1C90043800A6337D /* ShowView.h */,
+				745448E01C90043800A6337D /* ShowView.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		81DDE7891C16F8C300614E78 /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -2539,6 +2575,8 @@
 				81E651BE1C143EBC008700DA /* BaseNaviController.m */,
 				81E651C01C143ECD008700DA /* BaseViewController.h */,
 				81E651C11C143ECD008700DA /* BaseViewController.m */,
+				745448D61C8FE22900A6337D /* BaseFlowLAyout.h */,
+				745448D71C8FE22900A6337D /* BaseFlowLAyout.m */,
 			);
 			path = "基类";
 			sourceTree = "<group>";
@@ -2546,6 +2584,7 @@
 		81E651A51C143E57008700DA /* MVC */ = {
 			isa = PBXGroup;
 			children = (
+				745448D91C90040C00A6337D /* Login */,
 				81E651B61C143E57008700DA /* 首页 */,
 				81E651AA1C143E57008700DA /* 搭配 */,
 				81E651AE1C143E57008700DA /* 社区 */,
@@ -2720,10 +2759,15 @@
 		81E651B91C143E57008700DA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				745448D31C8FD7A500A6337D /* UrlImageButton.h */,
+				745448D41C8FD7A500A6337D /* UrlImageButton.m */,
 				81E659C81C146A2B008700DA /* MyButton.h */,
 				81E659C91C146A2B008700DA /* MyButton.m */,
 				81DDE75F1C16F10300614E78 /* HeadScrollView.h */,
 				81DDE7601C16F10300614E78 /* HeadScrollView.m */,
+				745448E51C90052600A6337D /* NewsViewCell.h */,
+				745448E61C90052600A6337D /* NewsViewCell.m */,
+				745448E71C90052600A6337D /* NewsViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3993,6 +4037,7 @@
 				81E659631C145A72008700DA /* set-weibo-48@3x.png in Resources */,
 				81E6584B1C145A72008700DA /* icon_store_promotions@2x.png in Resources */,
 				81E656241C145A72008700DA /* bottom_dapei_icon@3x.png in Resources */,
+				745448E31C90043800A6337D /* LoginViewController.xib in Resources */,
 				81E6583F1C145A72008700DA /* icon_store_baoyou@3x.png in Resources */,
 				81E657BF1C145A72008700DA /* icon_korea@2x.png in Resources */,
 				81E656F61C145A72008700DA /* face_icon_clock@2x.png in Resources */,
@@ -4605,6 +4650,7 @@
 				81E657991C145A72008700DA /* icon_date_clock_detail@2x.png in Resources */,
 				81E6589B1C145A72008700DA /* icon_zhidemai_list_zhekou@2x.png in Resources */,
 				81E657A41C145A72008700DA /* icon_detail_unselected@3x.png in Resources */,
+				745448E91C90052600A6337D /* NewsViewCell.xib in Resources */,
 				74685B361C562674007096CC /* CombineViewController.xib in Resources */,
 				81E657371C145A72008700DA /* icon_bbs_huifu_delete_pic_hover@2x.png in Resources */,
 				81E656921C145A72008700DA /* clothes-tab-bg@2x.png in Resources */,
@@ -4886,18 +4932,22 @@
 				81DDE7AD1C16F8C300614E78 /* SDImageCache.m in Sources */,
 				7445AEBB1C8ED0C700C1C4E3 /* MJRefreshAutoFooter.m in Sources */,
 				7445AEC31C8ED0C700C1C4E3 /* MJRefreshBackGifFooter.m in Sources */,
+				745448E11C90043800A6337D /* LoginManage.m in Sources */,
 				7445AEB91C8ED0C700C1C4E3 /* NSObject+MJProperty.m in Sources */,
 				7445AEB81C8ED0C700C1C4E3 /* NSObject+MJKeyValue.m in Sources */,
 				7445AEB21C8ED0C700C1C4E3 /* MJFoundation.m in Sources */,
 				81DDE7B61C16F8C300614E78 /* UIImage+MultiFormat.m in Sources */,
+				745448E81C90052600A6337D /* NewsViewCell.m in Sources */,
 				81DDE7B11C16F8C300614E78 /* SDWebImageDownloaderOperation.m in Sources */,
 				7445AEBE1C8ED0C700C1C4E3 /* MJRefreshFooter.m in Sources */,
 				81DDE7B81C16F8C300614E78 /* UIImageView+HighlightedWebCache.m in Sources */,
 				81E651DA1C144274008700DA /* BuyCarViewController.m in Sources */,
 				7445AECB1C8ED0C700C1C4E3 /* UIScrollView+MJExtension.m in Sources */,
+				745448E21C90043800A6337D /* LoginViewController.m in Sources */,
 				81DDE7641C16F74B00614E78 /* HeadModel.m in Sources */,
 				7445AEB31C8ED0C700C1C4E3 /* MJProperty.m in Sources */,
 				7445AEB11C8ED0C700C1C4E3 /* MJExtensionConst.m in Sources */,
+				745448D51C8FD7A500A6337D /* UrlImageButton.m in Sources */,
 				7445AEC81C8ED0C700C1C4E3 /* MJRefreshStateHeader.m in Sources */,
 				7445AEB41C8ED0C700C1C4E3 /* MJPropertyKey.m in Sources */,
 				81E651E11C1444D6008700DA /* PersonViewController.m in Sources */,
@@ -4921,6 +4971,7 @@
 				81E651811C1423F0008700DA /* main.m in Sources */,
 				7445AEB71C8ED0C700C1C4E3 /* NSObject+MJCoding.m in Sources */,
 				81DDE7B31C16F8C300614E78 /* SDWebImagePrefetcher.m in Sources */,
+				745448E41C90043800A6337D /* ShowView.m in Sources */,
 				7445AEC21C8ED0C700C1C4E3 /* MJRefreshAutoStateFooter.m in Sources */,
 				81DDE7AB1C16F8C300614E78 /* MKAnnotationView+WebCache.m in Sources */,
 				81DDE7D11C16F96900614E78 /* AFHTTPSessionManager.m in Sources */,
@@ -4931,6 +4982,7 @@
 				7445AEB61C8ED0C700C1C4E3 /* NSObject+MJClass.m in Sources */,
 				74685B351C562674007096CC /* CombineViewController.m in Sources */,
 				7445AEBA1C8ED0C700C1C4E3 /* NSString+MJExtension.m in Sources */,
+				745448D81C8FE22900A6337D /* BaseFlowLAyout.m in Sources */,
 				81E651C51C143FAC008700DA /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

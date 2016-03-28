@@ -17,7 +17,7 @@
 }
 
 @property (nonatomic,strong)UIScrollView *bgScrollView;
-@property (strong, nonatomic)UIView *headView;
+//@property (strong, nonatomic)UIView *headView;
 
 
 @property (strong,nonatomic)NSMutableArray *data;

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HeadModel : JSONModel
+@interface HeadModel : NSObject
 @property (nonatomic,copy)NSString *picUrl;
 @property (nonatomic,copy)NSString *title;
 
