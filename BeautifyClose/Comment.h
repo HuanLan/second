@@ -32,4 +32,9 @@
 
 #define  kheadViewHeight 140
 
+
+#pragma mark 网络链接
+#define kBaseRequest @"http://api2.hichao.com"
+
+
 #endif

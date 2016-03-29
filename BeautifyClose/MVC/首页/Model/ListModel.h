@@ -8,13 +8,49 @@
 
 #import <Foundation/Foundation.h>
 
+@class Action;
 @interface ListModel : NSObject
 
 
-@property (nonatomic, copy) NSString *nav_name;
+@property (nonatomic, copy) NSString *descript;
 
-@property (nonatomic, copy) NSString *cate_names;
+@property (nonatomic, copy) NSString *id;
 
-@property (nonatomic, copy) NSString *nav_cat_ids;
+@property (nonatomic, copy) NSString *nationalFlag;
+
+@property (nonatomic, copy) NSString *trackValue;
+
+@property (nonatomic, assign) NSInteger publish_date;
+
+@property (nonatomic, copy) NSString *picUrl;
+
+@property (nonatomic, copy) NSString *eventIcon;
+
+@property (nonatomic, copy) NSString *stateMessage;
+
+@property (nonatomic, copy) NSString *componentType;
+
+@property (nonatomic, copy) NSString *price;
+
+@property (nonatomic, copy) NSString *collectionCount;
+
+@property (nonatomic, strong) Action *action;
+
+@property (nonatomic, copy) NSString *origin_price;
+
+@property (nonatomic, copy) NSString *sales;
+
+@property (nonatomic, copy) NSString *country;
+
 
 @end
+@interface Action : NSObject
+
+@property (nonatomic, copy) NSString *collectionCount;
+
+@property (nonatomic, copy) NSString *actionType;
+
+@property (nonatomic, copy) NSString *trackValue;
+
+@end
+

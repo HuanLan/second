@@ -6,8 +6,8 @@
 //  Copyright © 2016年 陈若男. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "JRSegmentViewController.h"
 
-@interface CombineViewController : BaseViewController
+@interface CombineViewController : JRSegmentViewController
 
 @end

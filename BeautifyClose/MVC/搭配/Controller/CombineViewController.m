@@ -7,37 +7,56 @@
 //
 
 #import "CombineViewController.h"
+#import "FirstViewController.h"
+#import "SecondViewController.h"
 
 @interface CombineViewController ()
 
 //@property (nonatomic,strong)UIScrollView *scrollView;
 //@property (nonatomic,strong)
-@property (weak, nonatomic) IBOutlet UIScrollView *bgScrollView;
+//@property (weak, nonatomic) IBOutlet UIScrollView *bgScrollView;
 
 @end
 
 @implementation CombineViewController
 
+- (instancetype)init{
+    
+    if (self = [super init]) {
+        
+        FirstViewController *firstVC = [[FirstViewController alloc] init];
+        SecondViewController *secondVC = [[SecondViewController alloc] init];
+        
+//        self.segmentBgColor = [UIColor colorWithRed:18.0f/255 green:50.0f/255 blue:110.0f/255 alpha:1.0f];
+        self.indicatorViewColor = [UIColor whiteColor];
+        self.titleColor = [UIColor colorWithRed:0.144 green:0.608 blue:0.911 alpha:1.000];
+
+        
+        [self setViewControllers:@[firstVC, secondVC]];
+        [self setTitles:@[@"穿搭", @"话题"]];
+
+    }
+    return self;
+    
+}
+- (void)loadView{
+    
+    [super loadView];
+    
+   }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-   
-    _bgScrollView.contentSize = CGSizeMake(kScreenWidth*2, kScreenHeight);
-    [self setpSegmentCtrl];
+    
+    
+    
+    
+
     
 }
 
 
-- (void)setpSegmentCtrl{
-    
-    UISegmentedControl *segmentCtrl = [[UISegmentedControl alloc]initWithItems:@[@"穿搭",@"专题"]];
-    segmentCtrl.frame = CGRectMake(0, 0, 80, 30);
-    segmentCtrl.selectedSegmentIndex = 0;
-//    segmentCtrl.tintColor = [UIColor grayColor];
-    [segmentCtrl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
-    [self.navigationItem setTitleView:segmentCtrl];
-    
-}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -53,18 +72,4 @@
 }
 */
 
-
-- (IBAction)segmentAction:(UISegmentedControl *)sender {
-    
-    NSInteger index = sender.selectedSegmentIndex;
-    
-//    switch (index) {
-//        case 0:
-//            <#statements#>
-//            break;
-//            
-//        default:
-//            break;
-//    }
-}
 @end

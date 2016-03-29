@@ -9,6 +9,8 @@
 #import "GoodsViewController.h"
 #import "NewsViewCell.h"
 #import "BaseFlowLAyout.h"
+#import "ListModel.h"
+#import <CoreText/CoreText.h>
 
 @interface GoodsViewController ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 
@@ -23,21 +25,26 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (instancetype)initWithFrame:(CGRect)frame{
     
-    BaseFlowLAyout *flow = [[BaseFlowLAyout alloc]initWithItem:CGSizeMake(130, 180) withScrollDirection:UICollectionViewScrollDirectionVertical withMinSpace:0 withMinLine:10];
+    BaseFlowLAyout *flow = [[BaseFlowLAyout alloc]initWithItem:CGSizeMake(160, 200) withScrollDirection:UICollectionViewScrollDirectionVertical withMinSpace:0 withMinLine:10];
     //
     if (self = [super initWithFrame:frame collectionViewLayout:flow]) {
         
         self.delegate = self;
         self.dataSource = self;
         self.backgroundColor = [UIColor whiteColor];
-        [self registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    }
+        [self registerNib:[UINib nibWithNibName:@"NewsViewCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];    }
     return self;
     
     
-    //    [self.collectionView registerNib:[UINib nibWithNibName:@"NewsViewCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
+    
    
     
+}
+
+- (void)setData:(NSMutableArray *)data{
+    
+    _data = data;
+    [self reloadData];
 }
 
 #pragma mark <UICollectionViewDataSource>
@@ -45,18 +52,52 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return 20;
+    return _data.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor redColor];
+    NewsViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    ListModel *model = self.data[indexPath.item];
+    cell.goodName.text = model.descript;
+    cell.goodPrice.attributedText = [self joinStr:model.price withStr:model.origin_price ];
+    [cell.goodImgView sd_setImageWithURL:[NSURL URLWithString:model.picUrl]];
+    
+//    cell.backgroundColor = [UIColor redColor];
     return cell;
 }
 
 
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    
+    UIEdgeInsets edge = UIEdgeInsetsMake(5, 10, 5, 10);
+    return edge;
+    
+}
+
+- (NSMutableAttributedString *)joinStr:(NSString *)price withStr:(NSString *)origin_str{
+    
+    NSDictionary *priceDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                               [UIFont systemFontOfSize:16.0],NSFontAttributeName,
+                               [UIColor magentaColor],NSForegroundColorAttributeName,
+                               nil];
+    NSDictionary *originDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [UIFont systemFontOfSize:13.0],NSFontAttributeName,
+                                [UIColor grayColor],NSForegroundColorAttributeName,
+                                @(NSUnderlinePatternSolid | NSUnderlineStyleSingle) ,NSStrikethroughStyleAttributeName,
+
+                                nil];
+    
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"$%@", price] attributes:priceDict];
+    NSAttributedString *str2 = [[NSAttributedString alloc]initWithString:[NSString stringWithFormat:@"$%@",origin_str] attributes:originDict];
+    
+  
+    
+    [attrStr appendAttributedString:str2];
+    
+    return attrStr;
+}
 /*
 #pragma mark - Navigation
 
