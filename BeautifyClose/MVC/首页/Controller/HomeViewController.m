@@ -1,4 +1,4 @@
-//
+ //
 //  HomeViewController.m
 //  BeautifyClose
 //
@@ -13,19 +13,19 @@
 #import "HeadModel.h"
 #import "ListModel.h"
 
-#import "WJItemsControlView.h"
 
 #import "GoodsViewController.h"
 
 @interface HomeViewController ()<UIScrollViewDelegate>{
     
-       WJItemsControlView *_itemControlView;
+       HMSegmentedControl *_hMItemCtrl;
+    
 }
 @property (strong, nonatomic)HeadScrollView *headScrollView;
 @property (nonatomic,strong)NSArray *navArr;
 @property (strong,nonatomic)NSMutableArray *listArr;
 @property (strong,nonatomic)GoodsViewController *newsCollection;
-@property (nonatomic,strong)NSMutableArray *collections;
+//@property (nonatomic,strong)NSMutableArray *collections;
 
 
 @property (strong, nonatomic)UIPageControl *HpageCtrl;
@@ -87,83 +87,47 @@
 
 - (void)createGoodsViewWithTitleArr:(NSMutableArray *)arr{
     
-//    NSArray * titleArr = @[@"今日上新",@"上装",@"裙装",@"裤装"];
-    _collections = [NSMutableArray array];
-    UIScrollView *scroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, _headScrollView.bottom+44, kScreenWidth, kScreenHeight-44-64)];
-    scroll.delegate = self;
-    scroll.pagingEnabled = YES;
-    scroll.contentSize = CGSizeMake(kScreenWidth*arr.count, kScreenHeight-44-64);
-    scroll.backgroundColor = [UIColor yellowColor];
     
-    scroll.showsHorizontalScrollIndicator = NO;
-    scroll.bounces = NO;
-    
-    for (int i=0; i<arr.count; i++) {
-                
-        GoodsViewController *collectionView = [[GoodsViewController alloc]initWithFrame:CGRectMake(kScreenWidth*i, 0, kScreenWidth, scroll.height)];
-        collectionView.scrollEnabled = NO;
-        collectionView.backgroundColor = [UIColor colorWithRed:arc4random_uniform(10)*0.1 green:arc4random_uniform(10)*0.1  blue:arc4random_uniform(10)*0.1  alpha:1];
-        [scroll addSubview:collectionView];
-        [_collections addObject:collectionView];
-    }
-    _newsCollection = _collections[0];
-    [self.bgScrollView addSubview:scroll];
+    _newsCollection = [[GoodsViewController alloc]initWithFrame:CGRectMake(0, _headScrollView.bottom+44, kScreenWidth, kScreenHeight-44-64)];
+    _newsCollection.scrollEnabled = NO;
+    _newsCollection.backgroundColor = [UIColor whiteColor];
 
+    [self.bgScrollView addSubview:_newsCollection];
+    
     //头部控制的segMent
-    WJItemsConfig *config = [[WJItemsConfig alloc]init];
-    config.itemWidth = kScreenWidth/4.0;
+    _hMItemCtrl = [[HMSegmentedControl alloc]initWithSectionTitles:arr];
+    _hMItemCtrl.frame = CGRectMake(0, _headScrollView.bottom, kScreenWidth, 44);
+    _hMItemCtrl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     
-    _itemControlView = [[WJItemsControlView alloc]initWithFrame:CGRectMake(0, _headScrollView.bottom, kScreenWidth, 44)];
-    _itemControlView.tapAnimation = YES;
-    _itemControlView.config = config;
-    _itemControlView.titleArray = arr;
-    
-    __weak typeof (scroll)weakScrollView = scroll;
-    __weak typeof(self)weakSelf = self;
-    [_itemControlView setTapItemWithIndex:^(NSInteger index,BOOL animation){
-        
-        
-        [weakScrollView scrollRectToVisible:CGRectMake(index*weakScrollView.frame.size.width, 0.0, weakScrollView.frame.size.width,weakScrollView.frame.size.height) animated:animation];
-        
-        
-        AFHTTPSessionManager *manager2 = [AFHTTPSessionManager manager];
-        NSArray *arr = weakSelf.navArr[index][@"nav_cat_ids"];
-        NSMutableArray *lists = [NSMutableArray array];
-        NSDictionary *para = @{
-                               @"category_id":arr,
-                               };
-        
-        [manager2 GET:@"http://api2.hichao.com/items" parameters:para success:^(NSURLSessionDataTask *task, id responseObject) {
-            
-            NSArray *dataArr = responseObject[@"data"][@"items"];
-            for (NSDictionary *dic in dataArr) {
-                if ([dataArr indexOfObject:dic] == 0) {
-                    
-                    continue;
-                }
-                ListModel *model = [ListModel mj_objectWithKeyValues: dic[@"component"]];
-                [lists addObject:model];
-                
-            }
-            _newsCollection = weakSelf.collections[index];
-            weakSelf.newsCollection.data = lists;
-            
-            
-        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            
-            NSLog(@"manager2:获取失败");
-            
-            
-        }];
-
+    _hMItemCtrl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
+    _hMItemCtrl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
+    _hMItemCtrl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+    _hMItemCtrl.verticalDividerEnabled = YES;
+    _hMItemCtrl.verticalDividerColor = [UIColor colorWithWhite:0.150 alpha:1.000];
+    _hMItemCtrl.verticalDividerWidth = 1.0f;
+    [_hMItemCtrl setTitleFormatter:^NSAttributedString *(HMSegmentedControl *segmentedControl, NSString *title, NSUInteger index, BOOL selected) {
+        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:1.000 green:0.386 blue:0.953 alpha:1.000],NSFontAttributeName:[UIFont systemFontOfSize:15]}];
+        return attString;
     }];
-    [self.bgScrollView addSubview:_itemControlView];
+    
+    [_hMItemCtrl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+
+
+    
+    [self.bgScrollView addSubview:_hMItemCtrl];
 
     
 
 }
 
-
+- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
+    
+    NSInteger index = segmentedControl.selectedSegmentIndex;
+    NSArray *arr = self.navArr[index][@"nav_cat_ids"];
+    _newsCollection.paraArr = arr;
+    
+    NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
+}
 
 //轮播图
 - (void)loadData{
@@ -194,44 +158,44 @@
         NSArray *dataArr = responseObject[@"data"][@"items"];
         self.navArr = dataArr;
         
+        AFHTTPSessionManager *manager2 = [AFHTTPSessionManager manager];
+        
+        //加载今日上新的列表
+        _listArr = [NSMutableArray array];
+        [manager2 GET:@"http://api2.hichao.com/items" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+            
+            NSArray *dataArr = responseObject[@"data"][@"items"];
+            for (NSDictionary *dic in dataArr) {
+                if ([dataArr indexOfObject:dic] == 0) {
+                    
+                    continue;
+                }
+                ListModel *model = [ListModel mj_objectWithKeyValues: dic[@"component"]];
+                [_listArr addObject:model];
+                
+            }
+            //        GoodsViewController *collView = _collections[0];
+            _newsCollection.data = _listArr;
+            
+            
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            
+            NSLog(@"manager2:获取失败");
+            
+            
+        }];
+
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"manager1:获取失败");
         
 
     }];
-    AFHTTPSessionManager *manager2 = [AFHTTPSessionManager manager];
-
-    _listArr = [NSMutableArray array];
-    [manager2 GET:@"http://api2.hichao.com/items" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-        NSArray *dataArr = responseObject[@"data"][@"items"];
-        for (NSDictionary *dic in dataArr) {
-            if ([dataArr indexOfObject:dic] == 0) {
-                
-                continue;
-            }
-            ListModel *model = [ListModel mj_objectWithKeyValues: dic[@"component"]];
-            [_listArr addObject:model];
-            
-        }
-        GoodsViewController *collView = _collections[0];
-        collView.data = _listArr;
-        
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-      
-        NSLog(@"manager2:获取失败");
-        
-        
-    }];
-
+    
     
     
 }
-- (void)loadGoodsList{
-    
-}
+
 //复写data方法
 - (void)setData:(NSMutableArray *)data{
     if (_data != data) {
@@ -286,16 +250,10 @@
           _HpageCtrl.currentPage = page;
 
       
-    }else{
-        
-        CGFloat offset = offsetX/CGRectGetWidth(scrollView.frame);
-        [_itemControlView moveToIndex:offset];
-
     }
       
 
 }
-
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     if (scrollView == _headScrollView) {
@@ -310,15 +268,9 @@
         
         [self addTimer];
         
-    }else{
-        
-        float offset = scrollView.contentOffset.x;
-        offset = offset/CGRectGetWidth(scrollView.frame);
-        [_itemControlView endMoveToIndex:offset];
-
     }
     CGFloat offsetY = _bgScrollView.contentOffset.y;
-    if (offsetY < 140) {
+    if (offsetY < 120) {
         
         _newsCollection.scrollEnabled = NO;
         

@@ -19,6 +19,7 @@
 
 
 #import "BaseFlowLAyout.h"
+#import "HMSegmentedControl.h"
 
 
 
@@ -36,5 +37,7 @@
 #pragma mark 网络链接
 #define kBaseRequest @"http://api2.hichao.com"
 
+
+#define kARC4_Color [UIColor colorWithRed:arc4random_uniform(10)*0.1 green:arc4random_uniform(10)*0.1  blue:arc4random_uniform(10)*0.1  alpha:1]
 
 #endif

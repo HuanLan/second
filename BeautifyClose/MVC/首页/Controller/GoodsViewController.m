@@ -25,7 +25,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (instancetype)initWithFrame:(CGRect)frame{
     
-    BaseFlowLAyout *flow = [[BaseFlowLAyout alloc]initWithItem:CGSizeMake(160, 200) withScrollDirection:UICollectionViewScrollDirectionVertical withMinSpace:0 withMinLine:10];
+    BaseFlowLAyout *flow = [[BaseFlowLAyout alloc]initWithItem:CGSizeMake(160, 230) withScrollDirection:UICollectionViewScrollDirectionVertical withMinSpace:0 withMinLine:10];
     //
     if (self = [super initWithFrame:frame collectionViewLayout:flow]) {
         
@@ -39,6 +39,40 @@ static NSString * const reuseIdentifier = @"Cell";
     
    
     
+}
+
+
+- (void)setParaArr:(NSArray *)paraArr{
+    
+    _paraArr = paraArr;
+    
+    AFHTTPSessionManager *manager2 = [AFHTTPSessionManager manager];
+    NSMutableArray *lists = [NSMutableArray array];
+    NSDictionary *para = @{@"gv":@660,
+                           @"category_ids":paraArr,
+                           @"gf":@"android"
+                           };
+    
+    [manager2 GET:@"http://api2.hichao.com/items" parameters:para success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSArray *dataArr = responseObject[@"data"][@"items"];
+        for (NSDictionary *dic in dataArr) {
+            
+            ListModel *model = [ListModel mj_objectWithKeyValues: dic[@"component"]];
+            [lists addObject:model];
+            
+        }
+        self.data = lists;
+        
+    
+     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSLog(@"manager2:获取失败");
+        
+        
+    }];
+
+
 }
 
 - (void)setData:(NSMutableArray *)data{

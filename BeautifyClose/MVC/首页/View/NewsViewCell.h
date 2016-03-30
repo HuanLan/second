@@ -13,4 +13,5 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *goodName;
 @property (weak, nonatomic) IBOutlet UILabel *goodPrice;
+
 @end

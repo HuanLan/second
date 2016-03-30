@@ -50,11 +50,11 @@
 		745448E81C90052600A6337D /* NewsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 745448E61C90052600A6337D /* NewsViewCell.m */; };
 		745448E91C90052600A6337D /* NewsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 745448E71C90052600A6337D /* NewsViewCell.xib */; };
 		745652401CA8DC06008E5D3B /* GoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7456523F1CA8DC06008E5D3B /* GoodsViewController.m */; };
-		745652531CA90871008E5D3B /* WJItemsControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 745652521CA90871008E5D3B /* WJItemsControlView.m */; };
 		745652571CA91413008E5D3B /* PersonSB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 745652541CA91413008E5D3B /* PersonSB.storyboard */; };
 		745652581CA91413008E5D3B /* PersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 745652561CA91413008E5D3B /* PersonViewController.m */; };
 		7456525B1CA9156F008E5D3B /* RemindView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7456525A1CA9156F008E5D3B /* RemindView.m */; };
 		745652831CA93E48008E5D3B /* ListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 745652821CA93E48008E5D3B /* ListModel.m */; };
+		745EE35D1CABE02D00ECDDA8 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 745EE35C1CABE02D00ECDDA8 /* HMSegmentedControl.m */; };
 		74685B351C562674007096CC /* CombineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74685B331C562674007096CC /* CombineViewController.m */; };
 		81DDE7611C16F10300614E78 /* HeadScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 81DDE7601C16F10300614E78 /* HeadScrollView.m */; };
 		81DDE7641C16F74B00614E78 /* HeadModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 81DDE7631C16F74B00614E78 /* HeadModel.m */; };
@@ -1201,8 +1201,6 @@
 		745448E71C90052600A6337D /* NewsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsViewCell.xib; sourceTree = "<group>"; };
 		7456523E1CA8DC06008E5D3B /* GoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsViewController.h; sourceTree = "<group>"; };
 		7456523F1CA8DC06008E5D3B /* GoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsViewController.m; sourceTree = "<group>"; };
-		745652511CA90871008E5D3B /* WJItemsControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJItemsControlView.h; sourceTree = "<group>"; };
-		745652521CA90871008E5D3B /* WJItemsControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJItemsControlView.m; sourceTree = "<group>"; };
 		745652541CA91413008E5D3B /* PersonSB.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PersonSB.storyboard; sourceTree = "<group>"; };
 		745652551CA91413008E5D3B /* PersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonViewController.h; sourceTree = "<group>"; };
 		745652561CA91413008E5D3B /* PersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonViewController.m; sourceTree = "<group>"; };
@@ -1210,6 +1208,8 @@
 		7456525A1CA9156F008E5D3B /* RemindView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemindView.m; sourceTree = "<group>"; };
 		745652811CA93E48008E5D3B /* ListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListModel.h; sourceTree = "<group>"; };
 		745652821CA93E48008E5D3B /* ListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListModel.m; sourceTree = "<group>"; };
+		745EE35B1CABE02D00ECDDA8 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
+		745EE35C1CABE02D00ECDDA8 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		74685B321C562674007096CC /* CombineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CombineViewController.h; sourceTree = "<group>"; };
 		74685B331C562674007096CC /* CombineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CombineViewController.m; sourceTree = "<group>"; };
 		81DDE75F1C16F10300614E78 /* HeadScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadScrollView.h; sourceTree = "<group>"; };
@@ -2471,13 +2471,21 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		745652501CA90871008E5D3B /* WJSegment */ = {
+		745EE3591CABE02D00ECDDA8 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				745652511CA90871008E5D3B /* WJItemsControlView.h */,
-				745652521CA90871008E5D3B /* WJItemsControlView.m */,
+				745EE35A1CABE02D00ECDDA8 /* HMSegmentedControl */,
 			);
-			path = WJSegment;
+			path = Other;
+			sourceTree = "<group>";
+		};
+		745EE35A1CABE02D00ECDDA8 /* HMSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				745EE35B1CABE02D00ECDDA8 /* HMSegmentedControl.h */,
+				745EE35C1CABE02D00ECDDA8 /* HMSegmentedControl.m */,
+			);
+			path = HMSegmentedControl;
 			sourceTree = "<group>";
 		};
 		81DDE7891C16F8C300614E78 /* SDWebImage */ = {
@@ -2626,6 +2634,7 @@
 		81E651A51C143E57008700DA /* MVC */ = {
 			isa = PBXGroup;
 			children = (
+				745EE3591CABE02D00ECDDA8 /* Other */,
 				745448D91C90040C00A6337D /* Login */,
 				81E651B61C143E57008700DA /* 首页 */,
 				81E651AA1C143E57008700DA /* 搭配 */,
@@ -2811,7 +2820,6 @@
 		81E651B91C143E57008700DA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				745652501CA90871008E5D3B /* WJSegment */,
 				745448D31C8FD7A500A6337D /* UrlImageButton.h */,
 				745448D41C8FD7A500A6337D /* UrlImageButton.m */,
 				81E659C81C146A2B008700DA /* MyButton.h */,
@@ -4963,6 +4971,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7445AEB51C8ED0C700C1C4E3 /* MJPropertyType.m in Sources */,
+				745EE35D1CABE02D00ECDDA8 /* HMSegmentedControl.m in Sources */,
 				81DDE7D31C16F96900614E78 /* AFSecurityPolicy.m in Sources */,
 				81DDE7B41C16F8C300614E78 /* UIButton+WebCache.m in Sources */,
 				81DDE7B21C16F8C300614E78 /* SDWebImageManager.m in Sources */,
@@ -5021,7 +5030,6 @@
 				81E651CB1C144083008700DA /* BbsViewController.m in Sources */,
 				7445AECD1C8ED0C700C1C4E3 /* UIView+MJExtension.m in Sources */,
 				7445AEBD1C8ED0C700C1C4E3 /* MJRefreshComponent.m in Sources */,
-				745652531CA90871008E5D3B /* WJItemsControlView.m in Sources */,
 				81DDE7D41C16F96900614E78 /* AFURLConnectionOperation.m in Sources */,
 				7445AEC71C8ED0C700C1C4E3 /* MJRefreshNormalHeader.m in Sources */,
 				81DDE7D71C16F96900614E78 /* AFURLSessionManager.m in Sources */,

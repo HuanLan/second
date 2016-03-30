@@ -11,4 +11,6 @@
 @interface GoodsViewController : UICollectionView
 
 @property (nonatomic,strong)NSMutableArray *data;
+@property (nonatomic,strong)NSArray *paraArr;
+
 @end
