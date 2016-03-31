@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ListModel.h"
 
 @interface NewsViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *goodImgView;
@@ -14,4 +15,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *goodName;
 @property (weak, nonatomic) IBOutlet UILabel *goodPrice;
 
+@property (nonatomic,strong)ListModel *model;
 @end

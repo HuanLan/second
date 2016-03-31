@@ -419,10 +419,10 @@
             </objects>
             <point key="canvasLocation" x="2081" y="345"/>
         </scene>
-        <!--Base Navigation Controller-->
+        <!--Base Navi Controller-->
         <scene sceneID="8Gv-Ew-cuI">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cZn-yN-JeN" customClass="BaseNavigationController" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cZn-yN-JeN" customClass="BaseNaviController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Eb-ze-Oyy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

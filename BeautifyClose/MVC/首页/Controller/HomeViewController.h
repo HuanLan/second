@@ -7,19 +7,10 @@
 //
 
 #import "BaseViewController.h"
-@class HeadScrollView;
+
 @interface HomeViewController : BaseViewController
 
 
-{
-//    NSMutableArray *_data ;
-//    HeadScrollView *_headScroll;
-}
 
-@property (nonatomic,strong)UIScrollView *bgScrollView;
-//@property (strong, nonatomic)UIView *headView;
-
-
-@property (strong,nonatomic)NSMutableArray *data;
 
 @end
