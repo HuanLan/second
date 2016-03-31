@@ -11,6 +11,7 @@
 #import "BaseFlowLAyout.h"
 #import "ListModel.h"
 #import "BaseHeaderView.h"
+#import "XLPlainFlowLayout.h"
 
 #import "HeadModel.h"
 #import "ListModel.h"
@@ -70,8 +71,12 @@ static NSString * const Segment = @"SegmentHeader";
 
 - (void)_creatBGCollectionView{
     
-    BaseFlowLAyout *layout = [[BaseFlowLAyout alloc]initWithItem:CGSizeMake(160, 230) withScrollDirection:UICollectionViewScrollDirectionVertical withMinSpace:10 withMinLine:10];
-    _baseCollection = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+//    BaseFlowLAyout *layout = [[BaseFlowLAyout alloc]initWithItem:CGSizeMake(160, 230) withScrollDirection:UICollectionViewScrollDirectionVertical withMinSpace:10 withMinLine:10];
+    XLPlainFlowLayout *layout = [XLPlainFlowLayout new];
+    layout.itemSize = CGSizeMake(160, 230);
+    layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
+    layout.naviHeight = 0.0;
+    _baseCollection = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-64) collectionViewLayout:layout];
     
     _baseCollection.delegate = self;
     _baseCollection.dataSource = self;
@@ -290,6 +295,10 @@ static NSString * const Segment = @"SegmentHeader";
     
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+       return CGSizeMake(0, 0);
+}
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     
