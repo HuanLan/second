@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21E16FA71CAD64E400B59468 /* XLPlainFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E16FA61CAD64E400B59468 /* XLPlainFlowLayout.m */; };
 		740C33BE1CAA8CCA00A17811 /* JRSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C33BB1CAA8CCA00A17811 /* JRSegmentControl.m */; };
 		740C33BF1CAA8CCA00A17811 /* JRSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C33BD1CAA8CCA00A17811 /* JRSegmentViewController.m */; };
 		740C33C31CAA8D7F00A17811 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C33C11CAA8D7F00A17811 /* FirstViewController.m */; };
@@ -1122,6 +1123,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		21E16FA51CAD64E400B59468 /* XLPlainFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLPlainFlowLayout.h; sourceTree = "<group>"; };
+		21E16FA61CAD64E400B59468 /* XLPlainFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLPlainFlowLayout.m; sourceTree = "<group>"; };
 		740C33BA1CAA8CCA00A17811 /* JRSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSegmentControl.h; sourceTree = "<group>"; };
 		740C33BB1CAA8CCA00A17811 /* JRSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSegmentControl.m; sourceTree = "<group>"; };
 		740C33BC1CAA8CCA00A17811 /* JRSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSegmentViewController.h; sourceTree = "<group>"; };
@@ -2667,6 +2670,8 @@
 		81E651A41C143E57008700DA /* 基类 */ = {
 			isa = PBXGroup;
 			children = (
+				21E16FA51CAD64E400B59468 /* XLPlainFlowLayout.h */,
+				21E16FA61CAD64E400B59468 /* XLPlainFlowLayout.m */,
 				81E651BA1C143E97008700DA /* BaseTabBarController.h */,
 				81E651BB1C143E97008700DA /* BaseTabBarController.m */,
 				81E651BD1C143EBC008700DA /* BaseNaviController.h */,
@@ -5064,6 +5069,7 @@
 				740C33C81CAA8D8E00A17811 /* SecondViewController.m in Sources */,
 				7445AEB41C8ED0C700C1C4E3 /* MJPropertyKey.m in Sources */,
 				81DDE7AC1C16F8C300614E78 /* NSData+ImageContentType.m in Sources */,
+				21E16FA71CAD64E400B59468 /* XLPlainFlowLayout.m in Sources */,
 				7445AECC1C8ED0C700C1C4E3 /* UIScrollView+MJRefresh.m in Sources */,
 				81DDE7D51C16F96900614E78 /* AFURLRequestSerialization.m in Sources */,
 				7445AEB01C8ED0C700C1C4E3 /* MJDictionaryCache.m in Sources */,
@@ -5231,7 +5237,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BeautifyClose/Info.pch";
 				INFOPLIST_FILE = BeautifyClose/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -5245,7 +5251,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BeautifyClose/Info.pch";
 				INFOPLIST_FILE = BeautifyClose/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

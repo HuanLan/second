@@ -11,6 +11,10 @@
 #import "BaseFlowLAyout.h"
 #import "ListModel.h"
 #import "BaseHeaderView.h"
+<<<<<<< HEAD
+=======
+#import "XLPlainFlowLayout.h"
+>>>>>>> 972f430ce3fb8f6c48488ecd71db4b2d65aa5266
 
 #import "HeadModel.h"
 #import "ListModel.h"
@@ -70,8 +74,17 @@ static NSString * const Segment = @"SegmentHeader";
 
 - (void)_creatBGCollectionView{
     
+<<<<<<< HEAD
     BaseFlowLAyout *layout = [[BaseFlowLAyout alloc]initWithItem:CGSizeMake(160, 230) withScrollDirection:UICollectionViewScrollDirectionVertical withMinSpace:10 withMinLine:10];
     _baseCollection = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+=======
+//    BaseFlowLAyout *layout = [[BaseFlowLAyout alloc]initWithItem:CGSizeMake(160, 230) withScrollDirection:UICollectionViewScrollDirectionVertical withMinSpace:10 withMinLine:10];
+    XLPlainFlowLayout *layout = [XLPlainFlowLayout new];
+    layout.itemSize = CGSizeMake(160, 230);
+    layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
+    layout.naviHeight = 0.0;
+    _baseCollection = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-64) collectionViewLayout:layout];
+>>>>>>> 972f430ce3fb8f6c48488ecd71db4b2d65aa5266
     
     _baseCollection.delegate = self;
     _baseCollection.dataSource = self;
@@ -262,7 +275,11 @@ static NSString * const Segment = @"SegmentHeader";
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     
+<<<<<<< HEAD
     if (indexPath.item == 0) {
+=======
+    if (indexPath.section == 0) {
+>>>>>>> 972f430ce3fb8f6c48488ecd71db4b2d65aa5266
         BaseHeaderView *headView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:Header forIndexPath:indexPath];
         headView.headimgArr = (NSMutableArray *)self.headerArr;
         
@@ -280,6 +297,8 @@ static NSString * const Segment = @"SegmentHeader";
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+<<<<<<< HEAD
+=======
     
     if (section == 0) {
         
@@ -287,10 +306,26 @@ static NSString * const Segment = @"SegmentHeader";
 
     }
     return CGSizeMake(self.view.width, _hMItemCtrl.height);
+>>>>>>> 972f430ce3fb8f6c48488ecd71db4b2d65aa5266
+    
+    if (section == 0) {
+        
+        return CGSizeMake(self.view.width, 180);
+
+<<<<<<< HEAD
+    }
+    return CGSizeMake(self.view.width, _hMItemCtrl.height);
     
 }
 
 
+=======
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+       return CGSizeMake(0, 0);
+}
+
+>>>>>>> 972f430ce3fb8f6c48488ecd71db4b2d65aa5266
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     
     UIEdgeInsets edge = UIEdgeInsetsMake(5, 10, 5, 10);
