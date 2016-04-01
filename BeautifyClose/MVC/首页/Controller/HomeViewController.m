@@ -7,33 +7,41 @@
 //
 
 #import "HomeViewController.h"
-#import "HeadScrollView.h"
-
+#import "NewsViewCell.h"
+#import "BaseFlowLAyout.h"
+#import "ListModel.h"
+#import "BaseHeaderView.h"
 
 #import "HeadModel.h"
 #import "ListModel.h"
 
 
-#import "GoodsViewController.h"
 
-@interface HomeViewController ()<UIScrollViewDelegate>{
+
+@interface HomeViewController ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
+{
     
        HMSegmentedControl *_hMItemCtrl;
     
 }
-@property (strong, nonatomic)HeadScrollView *headScrollView;
+
+@property (strong,nonatomic)UICollectionView *baseCollection;
+
+//轮播图数据
+@property (strong,nonatomic)NSArray *headerArr;
+//标签栏数据
 @property (nonatomic,strong)NSArray *navArr;
+
+//商品列表数据
 @property (strong,nonatomic)NSMutableArray *listArr;
-@property (strong,nonatomic)GoodsViewController *newsCollection;
-//@property (nonatomic,strong)NSMutableArray *collections;
-
-
-@property (strong, nonatomic)UIPageControl *HpageCtrl;
-@property (nonatomic,strong)NSTimer *timer;
-
 
 
 @end
+
+static NSString * const reuseIdentifier = @"Cell";
+static NSString * const Header = @"baseHeader";
+static NSString * const Segment = @"SegmentHeader";
+
 
 @implementation HomeViewController
 
@@ -49,36 +57,36 @@
                  @"descript" : @"description"
                  };
     }];
-
-    _bgScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-    _bgScrollView.contentSize = CGSizeMake(kScreenWidth, kheadViewHeight+kScreenHeight);
-    _bgScrollView.showsVerticalScrollIndicator = NO;
-    _bgScrollView.delegate = self;
     
-    [self.view addSubview:_bgScrollView];
-    //滚动视图
-    [self createHeadView];
+    //初始化背景collectionview
+    [self _creatBGCollectionView];
     
-    
-    
+    //加载网络数据
     [self loadData];
     
 }
 
 
 
-- (void)createHeadView{
+- (void)_creatBGCollectionView{
     
+    BaseFlowLAyout *layout = [[BaseFlowLAyout alloc]initWithItem:CGSizeMake(160, 230) withScrollDirection:UICollectionViewScrollDirectionVertical withMinSpace:10 withMinLine:10];
+    _baseCollection = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) collectionViewLayout:layout];
+    
+    _baseCollection.delegate = self;
+    _baseCollection.dataSource = self;
+    _baseCollection.backgroundColor = [UIColor whiteColor];
+    
+    [_baseCollection registerNib:[UINib nibWithNibName:@"NewsViewCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
+    
+    [_baseCollection registerClass:[BaseHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:Header];
+    
+    [_baseCollection registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:Segment];
+    
+    _baseCollection.backgroundColor = [UIColor whiteColor];
+    
+    [self.view addSubview:_baseCollection];
 
-    //滑动视图
-    _headScrollView = [[HeadScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kheadViewHeight)];
-    _headScrollView.delegate = self ;
-    _headScrollView.backgroundColor = [UIColor yellowColor];
-    
-    //分页
-    _HpageCtrl = [[UIPageControl alloc]initWithFrame:CGRectMake((kScreenWidth-150)/2.0, _headScrollView.bottom-20, 150, 20)];
-    [_bgScrollView addSubview:_headScrollView];
-    [_bgScrollView addSubview:_HpageCtrl];
 
     
     
@@ -88,15 +96,9 @@
 - (void)createGoodsViewWithTitleArr:(NSMutableArray *)arr{
     
     
-    _newsCollection = [[GoodsViewController alloc]initWithFrame:CGRectMake(0, _headScrollView.bottom+44, kScreenWidth, kScreenHeight-44-64)];
-    _newsCollection.scrollEnabled = NO;
-    _newsCollection.backgroundColor = [UIColor whiteColor];
-
-    [self.bgScrollView addSubview:_newsCollection];
-    
     //头部控制的segMent
     _hMItemCtrl = [[HMSegmentedControl alloc]initWithSectionTitles:arr];
-    _hMItemCtrl.frame = CGRectMake(0, _headScrollView.bottom, kScreenWidth, 44);
+    _hMItemCtrl.frame = CGRectMake(0, 0, kScreenWidth, 44);
     _hMItemCtrl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     
     _hMItemCtrl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
@@ -111,11 +113,6 @@
     }];
     
     [_hMItemCtrl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-
-
-    
-    [self.bgScrollView addSubview:_hMItemCtrl];
-
     
 
 }
@@ -124,15 +121,16 @@
     
     NSInteger index = segmentedControl.selectedSegmentIndex;
     NSArray *arr = self.navArr[index][@"nav_cat_ids"];
-    _newsCollection.paraArr = arr;
-    
+    [self loadGoodsListWithPara:arr];
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
 }
 
-//轮播图
+#pragma mark --加载网络数据
 - (void)loadData{
-    //加载网络数据
+    
     NSMutableArray *arr = [NSMutableArray array];
+    
+    //轮播图
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager GET:@"http://api2.hichao.com/mall/banner" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         //解析网络数据
@@ -144,7 +142,7 @@
             [arr addObject:model];
         }
         
-        self.data = arr;
+        self.headerArr = arr;
        
 
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -152,39 +150,13 @@
        
     }];
     
+    //选项卡数据
     AFHTTPSessionManager *manager1 = [AFHTTPSessionManager manager];
     [manager1 GET:@"http://api2.hichao.com/region/recommend/tag" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        NSArray *dataArr = responseObject[@"data"][@"items"];
-        self.navArr = dataArr;
-        
-        AFHTTPSessionManager *manager2 = [AFHTTPSessionManager manager];
-        
-        //加载今日上新的列表
-        _listArr = [NSMutableArray array];
-        [manager2 GET:@"http://api2.hichao.com/items" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-            
-            NSArray *dataArr = responseObject[@"data"][@"items"];
-            for (NSDictionary *dic in dataArr) {
-                if ([dataArr indexOfObject:dic] == 0) {
-                    
-                    continue;
-                }
-                ListModel *model = [ListModel mj_objectWithKeyValues: dic[@"component"]];
-                [_listArr addObject:model];
-                
-            }
-            //        GoodsViewController *collView = _collections[0];
-            _newsCollection.data = _listArr;
-            
-            
-        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            
-            NSLog(@"manager2:获取失败");
-            
-            
-        }];
-
+        self.navArr = responseObject[@"data"][@"items"];
+//        //加载今日上新的列表
+//        _listArr = [NSMutableArray array];
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"manager1:获取失败");
@@ -196,123 +168,136 @@
     
 }
 
-//复写data方法
-- (void)setData:(NSMutableArray *)data{
-    if (_data != data) {
-        _data = data;
-    }
+- (void)loadGoodsListWithPara:(NSArray *)paraArr{
     
-    [_headScrollView createWithPageCount:_data.count];
-    [self loadDataWithHeadScrollView];
+    AFHTTPSessionManager *manager2 = [AFHTTPSessionManager manager];
+    NSMutableArray *lists = [NSMutableArray array];
+    NSDictionary *para = @{@"gv":@660,
+                           @"category_ids":paraArr,
+                           @"gf":@"android"
+                           };
+    
+    [manager2 GET:@"http://api2.hichao.com/items" parameters:para success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSArray *dataArr = responseObject[@"data"][@"items"];
+        for (NSDictionary *dic in dataArr) {
+            
+            ListModel *model = [ListModel mj_objectWithKeyValues: dic[@"component"]];
+            [lists addObject:model];
+            
+        }
+        self.listArr = lists;
+        
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSLog(@"manager2:获取失败");
+        
+        
+    }];
 
+}
+//复写data方法
+- (void)setHeaderArr:(NSMutableArray *)headerArr{
+    
+    if (_headerArr != headerArr) {
+        _headerArr = headerArr;
+    }
+    [self.baseCollection reloadData];
+    
 }
 
 //商品种类标题
 - (void)setNavArr:(NSArray *)navArr{
     
+      _navArr = navArr;
+    //取出标题 , 创建选项卡
      NSMutableArray *titles = [[NSMutableArray alloc]init];
-    _navArr = navArr;
-    for (NSDictionary *dic in navArr) {
+     for (NSDictionary *dic in navArr) {
         
         [titles addObject:dic[@"nav_name"]];
     }
+    
     [self createGoodsViewWithTitleArr:titles];
+    [self loadGoodsListWithPara:_navArr[0][@"nav_cat_ids"]];
+    [self.baseCollection reloadData];
+
+
+    
 }
 
 
 - (void)setListArr:(NSMutableArray *)listArr{
     
     _listArr = listArr;
+    [self.baseCollection reloadData];
     
     
 }
-- (void)loadDataWithHeadScrollView{
+
+#pragma mark --<UICollectionViewDataSource>
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     
-    _HpageCtrl.numberOfPages = _data.count;
+    return 2;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    for (int i = 0;i < _data.count;i ++) {
-        UIControl *contrl = _headScrollView.viewArr[i];
-        HeadModel *model = _data[i];
-        NSString *picStr = model.picUrl;
-        UIImageView *imgView = [[UIImageView alloc]initWithFrame:contrl.bounds];
-        [imgView sd_setImageWithURL:[NSURL URLWithString:picStr]];
-        [contrl addSubview:imgView];
+    if (section == 0) {
         
+        return 0;
     }
-    [self addTimer];
-}
-#pragma mark---头部滑动视图代理
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    CGFloat offsetX = scrollView.contentOffset.x;
     
-    if (scrollView == _headScrollView) {
-          int page = (offsetX +kScreenWidth/2)/kScreenWidth;
-          _HpageCtrl.currentPage = page;
+    return _listArr.count;
+}
 
-      
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NewsViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    ListModel *model = self.listArr[indexPath.item];
+    cell.model = model;
+    return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.item == 0) {
+        BaseHeaderView *headView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:Header forIndexPath:indexPath];
+        headView.headimgArr = (NSMutableArray *)self.headerArr;
+        
+        
+        return headView;
     }
-      
-
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    if (scrollView == _headScrollView) {
+        UICollectionReusableView *segmentView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:Segment forIndexPath:indexPath];
+        segmentView.backgroundColor = [UIColor redColor];
+        [segmentView addSubview:_hMItemCtrl];
         
-          [self removeTimer];
-    }
-  
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    if (scrollView == _headScrollView) {
         
-        [self addTimer];
-        
-    }
-    CGFloat offsetY = _bgScrollView.contentOffset.y;
-    if (offsetY < 120) {
-        
-        _newsCollection.scrollEnabled = NO;
-        
-    }else{
-        
-        _newsCollection.scrollEnabled = YES;
-        
-    }
-    NSLog(@"%f",offsetY);
-
-    
-    
-}
-
-- (void)addTimer{
-    
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:3.5 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
-    
-}
-
-- (void)removeTimer{
-    
-    [self.timer invalidate];
-}
-
-- (void)nextImage{
-    
-    int page = (int)self.HpageCtrl.currentPage;
-    if (page == (int)self.HpageCtrl.numberOfPages-1) {
-        page = 0;
-    }else
-    {
-        page ++;
-    }
-//    滚动
-    
-        CGFloat x = page *kScreenWidth;
-        [self.headScrollView setContentOffset:CGPointMake(x, 0) animated:YES];
-
+        return segmentView;
    
     
 }
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    
+    if (section == 0) {
+        
+        return CGSizeMake(self.view.width, 180);
+
+    }
+    return CGSizeMake(self.view.width, _hMItemCtrl.height);
+    
+}
+
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    
+    UIEdgeInsets edge = UIEdgeInsetsMake(5, 10, 5, 10);
+    return edge;
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
