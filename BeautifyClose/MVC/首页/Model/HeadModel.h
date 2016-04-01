@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface HeadModel : NSObject
+
 @property (nonatomic,copy)NSString *picUrl;
 @property (nonatomic,copy)NSString *title;
 

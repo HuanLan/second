@@ -11,14 +11,13 @@
 #import "BaseFlowLAyout.h"
 #import "ListModel.h"
 #import "BaseHeaderView.h"
-<<<<<<< HEAD
-=======
 #import "XLPlainFlowLayout.h"
->>>>>>> 972f430ce3fb8f6c48488ecd71db4b2d65aa5266
+
 
 #import "HeadModel.h"
 #import "ListModel.h"
-
+//详情
+#import "GoodsDetailViewCtrl.h"
 
 
 
@@ -62,6 +61,8 @@ static NSString * const Segment = @"SegmentHeader";
                  };
     }];
     
+    self.title = @"首页";
+    
     //初始化背景collectionview
     [self _creatBGCollectionView];
     
@@ -74,17 +75,13 @@ static NSString * const Segment = @"SegmentHeader";
 
 - (void)_creatBGCollectionView{
     
-<<<<<<< HEAD
-    BaseFlowLAyout *layout = [[BaseFlowLAyout alloc]initWithItem:CGSizeMake(160, 230) withScrollDirection:UICollectionViewScrollDirectionVertical withMinSpace:10 withMinLine:10];
-    _baseCollection = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) collectionViewLayout:layout];
-=======
+
 //    BaseFlowLAyout *layout = [[BaseFlowLAyout alloc]initWithItem:CGSizeMake(160, 230) withScrollDirection:UICollectionViewScrollDirectionVertical withMinSpace:10 withMinLine:10];
     XLPlainFlowLayout *layout = [XLPlainFlowLayout new];
     layout.itemSize = CGSizeMake(160, 230);
-    layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
+    layout.sectionInset = UIEdgeInsetsMake(0, 13, 0, 13);
     layout.naviHeight = 0.0;
-    _baseCollection = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-64) collectionViewLayout:layout];
->>>>>>> 972f430ce3fb8f6c48488ecd71db4b2d65aa5266
+    _baseCollection = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-64-50) collectionViewLayout:layout];
     
     _baseCollection.delegate = self;
     _baseCollection.dataSource = self;
@@ -135,6 +132,8 @@ static NSString * const Segment = @"SegmentHeader";
     NSInteger index = segmentedControl.selectedSegmentIndex;
     NSArray *arr = self.navArr[index][@"nav_cat_ids"];
     [self loadGoodsListWithPara:arr];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:1];
+    [_baseCollection scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
 }
 
@@ -142,9 +141,52 @@ static NSString * const Segment = @"SegmentHeader";
 - (void)loadData{
     
     NSMutableArray *arr = [NSMutableArray array];
-    
+
+
     //轮播图
+    NSURL *url1 = [NSURL URLWithString:@"http://api2.hichao.com/mall/banner?gf=iphone&gv=660"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url1];
+    AFHTTPRequestOperation *operation1 = [[AFHTTPRequestOperation alloc]initWithRequest:request];
+    operation1.responseSerializer = [AFJSONResponseSerializer serializer];
+    [operation1 setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //解析网络数据
+        NSArray *dataArr = responseObject[@"data"][@"items"];
+        
+        for(NSDictionary *dic in dataArr){
+            
+            HeadModel *model = [HeadModel mj_objectWithKeyValues:dic[@"component"]];
+            [arr addObject:model];
+        }
+        
+        self.headerArr = arr;
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"获取失败");
+    }];
+    
+     //选项卡数据
+    NSURL *url2 = [NSURL URLWithString:@"http://api2.hichao.com/region/recommend/tag?gf=iphone&gv=660"];
+    NSURLRequest *request2 = [NSURLRequest requestWithURL:url2];
+    AFHTTPRequestOperation *operation2 = [[AFHTTPRequestOperation alloc]initWithRequest:request2];
+    operation2.responseSerializer = [AFJSONResponseSerializer serializer];
+    [operation2 setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //解析网络数据
+         self.navArr = responseObject[@"data"][@"items"];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"manager1:获取失败");
+        
+
+    }];
+    //同时请求
+    NSOperationQueue *operationQueue = [[NSOperationQueue alloc]init];
+    [operationQueue setMaxConcurrentOperationCount:2];
+    [operationQueue addOperations:@[operation1,operation2] waitUntilFinished:NO];
+    
+
+/*
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer.timeoutInterval = 3.0;
     [manager GET:@"http://api2.hichao.com/mall/banner" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         //解析网络数据
         NSArray *dataArr = responseObject[@"data"][@"items"];
@@ -163,8 +205,13 @@ static NSString * const Segment = @"SegmentHeader";
        
     }];
     
-    //选项卡数据
+//    选项卡数据
     AFHTTPSessionManager *manager1 = [AFHTTPSessionManager manager];
+    
+    [manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    manager1.requestSerializer.timeoutInterval = 3.0;
+    [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    
     [manager1 GET:@"http://api2.hichao.com/region/recommend/tag" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         self.navArr = responseObject[@"data"][@"items"];
@@ -176,7 +223,7 @@ static NSString * const Segment = @"SegmentHeader";
         
 
     }];
-    
+  */
     
     
 }
@@ -187,7 +234,7 @@ static NSString * const Segment = @"SegmentHeader";
     NSMutableArray *lists = [NSMutableArray array];
     NSDictionary *para = @{@"gv":@660,
                            @"category_ids":paraArr,
-                           @"gf":@"android"
+                           @"gf":@"iphone"
                            };
     
     [manager2 GET:@"http://api2.hichao.com/items" parameters:para success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -268,6 +315,7 @@ static NSString * const Segment = @"SegmentHeader";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     NewsViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    [cell config];
     ListModel *model = self.listArr[indexPath.item];
     cell.model = model;
     return cell;
@@ -275,11 +323,9 @@ static NSString * const Segment = @"SegmentHeader";
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     
-<<<<<<< HEAD
-    if (indexPath.item == 0) {
-=======
+
     if (indexPath.section == 0) {
->>>>>>> 972f430ce3fb8f6c48488ecd71db4b2d65aa5266
+
         BaseHeaderView *headView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:Header forIndexPath:indexPath];
         headView.headimgArr = (NSMutableArray *)self.headerArr;
         
@@ -297,35 +343,23 @@ static NSString * const Segment = @"SegmentHeader";
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-<<<<<<< HEAD
-=======
     
     if (section == 0) {
         
         return CGSizeMake(self.view.width, 180);
 
-    }
-    return CGSizeMake(self.view.width, _hMItemCtrl.height);
->>>>>>> 972f430ce3fb8f6c48488ecd71db4b2d65aa5266
-    
-    if (section == 0) {
-        
-        return CGSizeMake(self.view.width, 180);
-
-<<<<<<< HEAD
     }
     return CGSizeMake(self.view.width, _hMItemCtrl.height);
     
 }
 
 
-=======
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
        return CGSizeMake(0, 0);
 }
 
->>>>>>> 972f430ce3fb8f6c48488ecd71db4b2d65aa5266
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     
     UIEdgeInsets edge = UIEdgeInsetsMake(5, 10, 5, 10);
@@ -333,6 +367,17 @@ static NSString * const Segment = @"SegmentHeader";
     
 }
 
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    GoodsDetailViewCtrl *detailVC = [[GoodsDetailViewCtrl alloc]init];
+    ListModel *model = _listArr[indexPath.item];
+    detailVC.view.backgroundColor = [UIColor whiteColor];
+    detailVC.sId = model.action.sourceId;
+    detailVC.imgPath = model.picUrl;
+    [self.navigationController pushViewController:detailVC animated:YES];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

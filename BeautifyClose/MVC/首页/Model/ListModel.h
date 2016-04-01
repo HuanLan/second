@@ -43,14 +43,27 @@
 @property (nonatomic, copy) NSString *country;
 
 
-@end
-@interface Action : NSObject
+@end@interface Action : NSObject
 
-@property (nonatomic, copy) NSString *collectionCount;
+@property (nonatomic, copy) NSString *source;
+
+@property (nonatomic, copy) NSString *height;
 
 @property (nonatomic, copy) NSString *actionType;
 
+@property (nonatomic, copy) NSString *id;
+
+@property (nonatomic, copy) NSString *width;
+
+@property (nonatomic, copy) NSString *sourceId;
+
 @property (nonatomic, copy) NSString *trackValue;
+
+@property (nonatomic, copy) NSString *type;
+
+@property (nonatomic, copy) NSString *collectionCount;
+
+@property (nonatomic, assign) NSInteger main_image;
 
 @end
 

@@ -36,13 +36,21 @@
     bool unsupportedColorSpace = (imageColorSpaceModel == 0 || imageColorSpaceModel == -1 || imageColorSpaceModel == kCGColorSpaceModelIndexed);
     if (unsupportedColorSpace)
         colorspaceRef = CGColorSpaceCreateDeviceRGB();
-
+    
     CGContextRef context = CGBitmapContextCreate(NULL, width,
                                                  height,
                                                  CGImageGetBitsPerComponent(imageRef),
                                                  0,
                                                  colorspaceRef,
                                                  kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
+
+    
+//    if (!context) {
+//        if (unsupportedColorSpace){
+//            CGColorSpaceRelease(colorspaceRef);
+//        }
+//        return image;
+//    }
 
     // Draw the image into the context and retrieve the new image, which will now have an alpha layer
     CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);

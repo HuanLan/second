@@ -10,12 +10,38 @@
 
 @implementation NewsViewCell
 
+
+- (void)config{
+    
+    self.layer.cornerRadius = self.raidus;
+    self.layer.borderColor = self.wColor.CGColor;
+    self.layer.borderWidth = self.bWidth;
+    [self layoutIfNeeded];
+
+}
+
+- (void)awakeFromNib {
+    // Initialization code
+    [self config];
+}
+
+-(void)prepareForInterfaceBuilder{
+    [self config];
+}
+
 -(void)setModel:(ListModel *)model{
     
     _model = model;
     self.goodPrice.attributedText = [self joinStr:model.price withStr:model.origin_price ];
-    
-    [self.goodImgView sd_setImageWithURL:[NSURL URLWithString:model.picUrl]];
+    NSString *imgPath = model.picUrl;
+    NSRange range = [model.picUrl rangeOfString:@"?"];
+    if(range.length > 0){
+        
+         imgPath = [model.picUrl substringWithRange:NSMakeRange(0, range.location)];
+        
+    }
+   
+    [self.goodImgView sd_setImageWithURL:[NSURL URLWithString:imgPath]];
     self.goodName.text = model.descript;
 
 
@@ -44,8 +70,6 @@
     
     return attrStr;
 }
-- (void)awakeFromNib {
-    // Initialization code
-}
+
 
 @end

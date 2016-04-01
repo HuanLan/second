@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		21E16FA71CAD64E400B59468 /* XLPlainFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E16FA61CAD64E400B59468 /* XLPlainFlowLayout.m */; };
+		7407DBA51CAE849C00954F22 /* FeHourGlass.m in Sources */ = {isa = PBXBuildFile; fileRef = 7407DBA41CAE849C00954F22 /* FeHourGlass.m */; };
+		7407DBA81CAE84AA00954F22 /* UIColor+flat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7407DBA71CAE84AA00954F22 /* UIColor+flat.m */; };
 		740C33BE1CAA8CCA00A17811 /* JRSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C33BB1CAA8CCA00A17811 /* JRSegmentControl.m */; };
 		740C33BF1CAA8CCA00A17811 /* JRSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C33BD1CAA8CCA00A17811 /* JRSegmentViewController.m */; };
 		740C33C31CAA8D7F00A17811 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740C33C11CAA8D7F00A17811 /* FirstViewController.m */; };
@@ -42,6 +44,7 @@
 		7445AECB1C8ED0C700C1C4E3 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7445AEAB1C8ED0C700C1C4E3 /* UIScrollView+MJExtension.m */; };
 		7445AECC1C8ED0C700C1C4E3 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 7445AEAD1C8ED0C700C1C4E3 /* UIScrollView+MJRefresh.m */; };
 		7445AECD1C8ED0C700C1C4E3 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7445AEAF1C8ED0C700C1C4E3 /* UIView+MJExtension.m */; };
+		744AD4501CAE335F00D52077 /* GoodsDetailViewCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 744AD44F1CAE335F00D52077 /* GoodsDetailViewCtrl.m */; };
 		744BEA9D1CAD21DD0072699F /* BaseHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744BEA9C1CAD21DD0072699F /* BaseHeaderView.m */; };
 		744BEAAE1CAD23BC0072699F /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744BEAA11CAD23BC0072699F /* TAAbstractDotView.m */; };
 		744BEAAF1CAD23BC0072699F /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744BEAA31CAD23BC0072699F /* TAAnimatedDotView.m */; };
@@ -1125,6 +1128,10 @@
 /* Begin PBXFileReference section */
 		21E16FA51CAD64E400B59468 /* XLPlainFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLPlainFlowLayout.h; sourceTree = "<group>"; };
 		21E16FA61CAD64E400B59468 /* XLPlainFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLPlainFlowLayout.m; sourceTree = "<group>"; };
+		7407DBA31CAE849C00954F22 /* FeHourGlass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeHourGlass.h; sourceTree = "<group>"; };
+		7407DBA41CAE849C00954F22 /* FeHourGlass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeHourGlass.m; sourceTree = "<group>"; };
+		7407DBA61CAE84AA00954F22 /* UIColor+flat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+flat.h"; sourceTree = "<group>"; };
+		7407DBA71CAE84AA00954F22 /* UIColor+flat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+flat.m"; sourceTree = "<group>"; };
 		740C33BA1CAA8CCA00A17811 /* JRSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSegmentControl.h; sourceTree = "<group>"; };
 		740C33BB1CAA8CCA00A17811 /* JRSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSegmentControl.m; sourceTree = "<group>"; };
 		740C33BC1CAA8CCA00A17811 /* JRSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSegmentViewController.h; sourceTree = "<group>"; };
@@ -1194,6 +1201,8 @@
 		7445AEAD1C8ED0C700C1C4E3 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		7445AEAE1C8ED0C700C1C4E3 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		7445AEAF1C8ED0C700C1C4E3 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		744AD44E1CAE335F00D52077 /* GoodsDetailViewCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsDetailViewCtrl.h; sourceTree = "<group>"; };
+		744AD44F1CAE335F00D52077 /* GoodsDetailViewCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDetailViewCtrl.m; sourceTree = "<group>"; };
 		744BEA9B1CAD21DD0072699F /* BaseHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseHeaderView.h; sourceTree = "<group>"; };
 		744BEA9C1CAD21DD0072699F /* BaseHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseHeaderView.m; sourceTree = "<group>"; };
 		744BEAA01CAD23BC0072699F /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
@@ -2344,6 +2353,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7407DBA21CAE848C00954F22 /* RefreshView */ = {
+			isa = PBXGroup;
+			children = (
+				7407DBA61CAE84AA00954F22 /* UIColor+flat.h */,
+				7407DBA71CAE84AA00954F22 /* UIColor+flat.m */,
+				7407DBA31CAE849C00954F22 /* FeHourGlass.h */,
+				7407DBA41CAE849C00954F22 /* FeHourGlass.m */,
+			);
+			path = RefreshView;
+			sourceTree = "<group>";
+		};
 		740C33B91CAA8CCA00A17811 /* JRSegmentControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -2670,6 +2690,7 @@
 		81E651A41C143E57008700DA /* 基类 */ = {
 			isa = PBXGroup;
 			children = (
+				7407DBA21CAE848C00954F22 /* RefreshView */,
 				21E16FA51CAD64E400B59468 /* XLPlainFlowLayout.h */,
 				21E16FA61CAD64E400B59468 /* XLPlainFlowLayout.m */,
 				81E651BA1C143E97008700DA /* BaseTabBarController.h */,
@@ -2853,6 +2874,8 @@
 			children = (
 				81E651C31C143FAC008700DA /* HomeViewController.h */,
 				81E651C41C143FAC008700DA /* HomeViewController.m */,
+				744AD44E1CAE335F00D52077 /* GoodsDetailViewCtrl.h */,
+				744AD44F1CAE335F00D52077 /* GoodsDetailViewCtrl.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5021,6 +5044,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7407DBA81CAE84AA00954F22 /* UIColor+flat.m in Sources */,
 				7445AEB51C8ED0C700C1C4E3 /* MJPropertyType.m in Sources */,
 				745EE35D1CABE02D00ECDDA8 /* HMSegmentedControl.m in Sources */,
 				81DDE7D31C16F96900614E78 /* AFSecurityPolicy.m in Sources */,
@@ -5044,6 +5068,7 @@
 				7445AEBC1C8ED0C700C1C4E3 /* MJRefreshBackFooter.m in Sources */,
 				81DDE7B71C16F8C300614E78 /* UIImage+WebP.m in Sources */,
 				81DDE7AD1C16F8C300614E78 /* SDImageCache.m in Sources */,
+				744AD4501CAE335F00D52077 /* GoodsDetailViewCtrl.m in Sources */,
 				7445AEBB1C8ED0C700C1C4E3 /* MJRefreshAutoFooter.m in Sources */,
 				7445AEC31C8ED0C700C1C4E3 /* MJRefreshBackGifFooter.m in Sources */,
 				745448E11C90043800A6337D /* LoginManage.m in Sources */,
@@ -5054,6 +5079,7 @@
 				81DDE7B61C16F8C300614E78 /* UIImage+MultiFormat.m in Sources */,
 				745448E81C90052600A6337D /* NewsViewCell.m in Sources */,
 				81DDE7B11C16F8C300614E78 /* SDWebImageDownloaderOperation.m in Sources */,
+				7407DBA51CAE849C00954F22 /* FeHourGlass.m in Sources */,
 				7445AEBE1C8ED0C700C1C4E3 /* MJRefreshFooter.m in Sources */,
 				81DDE7B81C16F8C300614E78 /* UIImageView+HighlightedWebCache.m in Sources */,
 				740C33BF1CAA8CCA00A17811 /* JRSegmentViewController.m in Sources */,

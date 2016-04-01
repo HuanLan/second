@@ -1,0 +1,2 @@
+/Users/chen/Library/Developer/Xcode/DerivedData/BeautifyClose-blgmykcjomfkjiesvirfjrdweteb/Build/Products/Debug-iphonesimulator/BeautifyClose.app
+
